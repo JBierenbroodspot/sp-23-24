@@ -41,3 +41,25 @@ TEST(test__allocate_code, handles_happy_values) {
         free(code);
     }
 }
+
+TEST(test__allocate_guess, handles_happy_values) {
+    size_t input_values[3] = {1, 5, 10};
+    size_t colour_size = sizeof(Colour);
+
+    for (auto &input_value : input_values) {
+        Colour mock_code[input_value] = {};
+        FeedbackState mock_feedback[input_value] = {};
+
+        Guess* guess = _allocate_guess(input_value);
+
+        size_t result = sizeof(*guess);
+        size_t expected_value = sizeof(*mock_code) + sizeof(*mock_feedback);
+
+        EXPECT_EQ(result, expected_value) 
+            << "Allocated size " << result 
+            << " did not match expected size " << expected_value 
+            << ".";
+
+        free(guess);
+    }
+}
