@@ -1,5 +1,5 @@
-#ifndef MASTERMIND_DATATYPES_H_
-#define MASTERMIND_DATATYPES_H_
+#ifndef MASTERMIND_SRC_INCLUDE_DATATYPES_H_
+#define MASTERMIND_SRC_INCLUDE_DATATYPES_H_
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -15,11 +15,6 @@ typedef unsigned int Colour;
  * arrays. 
  */
 typedef Colour* Code;
-/**
- * An alias for a pointer to a FeedbackState. This pointer is mainly meant to
- * point at arrays. 
- */
-typedef FeedbackState* Feedback;
 
 /**
  * @brief Defines different levels of correctness for when two Codes are 
@@ -36,6 +31,12 @@ typedef enum {
     /** A Colour is present in both Codes in the correct position. */
     CORRECT = 2
 } FeedbackState;
+
+/**
+ * An alias for a pointer to a FeedbackState. This pointer is mainly meant to
+ * point at arrays. 
+ */
+typedef FeedbackState* Feedback;
 
 /**
  * @brief Stores a pointer to a Code and optionally one to a corresponding 
@@ -60,6 +61,15 @@ typedef struct {
     /** The guesses that have been submitted in the game. */
     Guess** const guesses;
 } GameState;
+
+bool feedback_equals(Feedback* const lhs, Feedback* const rhs);
+bool code_equals(Code* const lhs, Code* const rhs);
+
+void code_subtract(
+    const Code* result_buffer, 
+    const Code* const lhs, 
+    const Code* const rhs
+);
 
 /**
  * @brief Allocates memory for a new GameState.
@@ -125,4 +135,4 @@ static Code* _allocate_code(const size_t code_length);
  */
 void free_code(Code* code);
 
-#endif // MASTERMIND_DATATYPES_H_
+#endif // MASTERMIND_SRC_INCLUDE_DATATYPES_H_
