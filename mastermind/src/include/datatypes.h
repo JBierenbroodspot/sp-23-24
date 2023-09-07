@@ -61,4 +61,68 @@ typedef struct {
     Guess** const guesses;
 } GameState;
 
+/**
+ * @brief Allocates memory for a new GameState.
+ * 
+ * @param game_width The width of the game, e.g. the length of Codes.
+ * @param game_length The amount of turns before the game is over.
+ * @return GameState* A pointer to a newly allocated GameState.
+ */
+GameState* allocate_game_state(
+    size_t const game_width, 
+    size_t const game_length
+);
+/**
+ * @brief Frees a GameState from memory.
+ * 
+ * @param game_state A pointer to the GameState to be deleted.
+ */
+void free_game_state(GameState* game_state);
+
+/**
+ * @brief Allocates a new Guess with the game_width from a GameState.
+ * 
+ * @param game_state The GameState that is going to own the guess.
+ * @return Guess* A newly allocated Guess with empty values.
+ */
+Guess* allocate_guess(GameState* const game_state);
+static Guess* _allocate_guess(const size_t code_length);
+/**
+ * @brief Frees a Guess from memory.
+ * 
+ * @param guess A pointer to the Guess to be deleted.
+ */
+void free_guess(Guess* guess);
+
+/**
+ * @brief Allocates memory for a new Feedback using the game_width from a 
+ * GameState.
+ * 
+ * @param game_state The GameState that is going to own the Feedback.
+ * @return Feedback* A newly allocated Feedback.
+ */
+Feedback* allocate_feedback(GameState* const game_state);
+static Feedback* _allocate_feedback(const size_t code_length);
+/**
+ * @brief Frees a Feedback from memory.
+ * 
+ * @param guess A pointer to the Feedback to be deleted.
+ */
+void free_feedback(Feedback* feedback);
+
+/**
+ * @brief Allocates memory for a new Code using the game_width from a GameState.
+ * 
+ * @param game_state The GameState that is going to own the Code.
+ * @return Feedback* A newly allocated Code.
+ */
+Code* allocate_code(GameState* const game_state);
+static Code* _allocate_code(const size_t code_length);
+/**
+ * @brief Frees a Code from memory.
+ * 
+ * @param guess A pointer to the Code to be deleted.
+ */
+void free_code(Code* code);
+
 #endif // MASTERMIND_DATATYPES_H_
