@@ -1,6 +1,8 @@
-enable_testing()
+# GTest is a C++ framework so tests will be written in C++ instead of C.
+enable_language(CXX)
 
-set(TEST_SRC_FILES test_main.c test_datatypes.c)
+enable_testing()
+set(TEST_SRC_FILES test_datatypes.cpp)
 
 add_executable(test_mastermind ${TEST_SRC_FILES})
 target_link_libraries(test_mastermind GTest::gtest_main)
