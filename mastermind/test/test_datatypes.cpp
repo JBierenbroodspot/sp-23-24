@@ -1,4 +1,13 @@
+/**
+ * This fix is required to be able to use headers that have been compiled using
+ * a plain C compile inside a C++ file.
+ * 
+ * Source: https://stackoverflow.com/a/18879053/21104520
+ */
+extern "C" {
 #include "datatypes.h"
+    #include <stdlib.h>
+}
 
 #include <gtest/gtest.h>
 
