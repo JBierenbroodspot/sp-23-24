@@ -5,17 +5,15 @@
  * Source: https://stackoverflow.com/a/18879053/21104520
  */
 extern "C" {
-#include "datatypes.h"
+    #include "datatypes.h"
     #include <stdlib.h>
 }
 
 #include <gtest/gtest.h>
 
-#include <stdlib.h>
-
 TEST(test__allocate_feedback, handles_happy_values) {
     size_t input_values[3] = {1, 5, 10};
-    size_t feedback_size = sizeof(Feedback);
+    size_t feedback_size = sizeof(FeedbackState);
 
     for (auto &input_value : input_values) {
         Feedback* feedback = _allocate_feedback(input_value);
@@ -36,7 +34,7 @@ TEST(test__allocate_code, handles_happy_values) {
     size_t input_values[3] = {1, 5, 10};
     size_t colour_size = sizeof(Colour);
 
-    for (auto &input_value : input_values) {
+    for (const auto input_value : input_values) {
         Code* code = _allocate_code(input_value);
 
         size_t result = sizeof(*code);
@@ -53,7 +51,6 @@ TEST(test__allocate_code, handles_happy_values) {
 
 TEST(test__allocate_guess, handles_happy_values) {
     size_t input_values[3] = {1, 5, 10};
-    size_t colour_size = sizeof(Colour);
 
     for (auto &input_value : input_values) {
         Colour mock_code[input_value] = {};
