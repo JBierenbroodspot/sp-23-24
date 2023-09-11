@@ -96,7 +96,7 @@ void free_game_state(GameState* game_state);
  * @return Guess* A newly allocated Guess with empty values.
  */
 Guess* allocate_guess(GameState* const game_state);
-static Guess* _allocate_guess(const size_t code_length);
+Guess* _allocate_guess(const size_t code_length);
 /**
  * @brief Frees a Guess from memory.
  * 
@@ -112,7 +112,7 @@ void free_guess(Guess* guess);
  * @return Feedback* A newly allocated Feedback.
  */
 Feedback* allocate_feedback(GameState* const game_state);
-static Feedback* _allocate_feedback(const size_t code_length);
+Feedback* _allocate_feedback(const size_t code_length);
 /**
  * @brief Frees a Feedback from memory.
  * 
@@ -127,7 +127,7 @@ void free_feedback(Feedback* feedback);
  * @return Feedback* A newly allocated Code.
  */
 Code* allocate_code(GameState* const game_state);
-static Code* _allocate_code(const size_t code_length);
+Code* _allocate_code(const size_t code_length);
 /**
  * @brief Frees a Code from memory.
  * 
