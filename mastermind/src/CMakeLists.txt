@@ -1,3 +1,17 @@
-set(SRC_FILES main.c datatypes.c)
+enable_language(C)
 
-add_executable(mastermind ${SRC_FILES})
+add_library(mastermind_lib 
+    datatypes.c
+)
+
+target_include_directories(mastermind_lib
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+add_executable(mastermind
+    main.c
+)
+
+target_link_libraries(mastermind
+    mastermind_lib
+)
