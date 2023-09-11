@@ -32,7 +32,7 @@ Code* _allocate_code(const size_t code_length) {
     return code;
 }
 
-void free_code(Code code) {
+void free_code(Code* code) {
     free(code);
 }
 
