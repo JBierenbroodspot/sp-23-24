@@ -27,7 +27,7 @@ Code* allocate_code(GameState* const game_state) {
 Code* _allocate_code(const size_t code_length) {
     Code* code = malloc(code_length * sizeof(Colour));
 
-    if (code == NULL) exit(-1);
+    if (code == NULL) abort();
     
     return code;
 }
@@ -37,7 +37,7 @@ void free_code(Code* code) {
 }
 
 Guess* allocate_guess(GameState* const game_state) {
-    if (game_state->game_width == NULL) exit(-1);
+    if (game_state->game_width == NULL) abort();
 
     return _allocate_guess(game_state->game_width);
 }
@@ -45,7 +45,7 @@ Guess* allocate_guess(GameState* const game_state) {
 Guess* _allocate_guess(size_t code_length) {
     Guess* guess = malloc(sizeof(Guess));
 
-    if (guess == NULL) exit(-1);
+    if (guess == NULL) abort();
 
     guess->code = _allocate_code(code_length);
     guess->feedback = _allocate_feedback(code_length);
