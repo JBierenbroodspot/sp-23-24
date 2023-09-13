@@ -1,4 +1,4 @@
-#include "include/datatypes.h"
+#include "datatypes.h"
 
 Feedback* allocate_feedback(GameState* const game_state) {
     if (game_state->game_width == NULL) exit(-1);
