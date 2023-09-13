@@ -1,3 +1,11 @@
+/**
+ * @file datatypes.h
+ * @author Jimmy Bierenbroodspot (jim12.brood@gmail.com)
+ * @brief Contains datatypes and functions to manipulate them.
+ * @version 0.1
+ * @date 2023-09-12
+ */
+
 #ifndef MASTERMIND_SRC_INCLUDE_DATATYPES_H_
 #define MASTERMIND_SRC_INCLUDE_DATATYPES_H_
 
