@@ -1,5 +1,13 @@
 #include "datatypes.h"
 
+inline void* _allocate_heap(size_t type_size, size_t type_amount) {
+    void* ptr = malloc(type_size * type_amount);
+
+    if (ptr == NULL) exit(EXIT_FAILURE);
+
+    return ptr;
+}
+
 Feedback* allocate_feedback(GameState* const game_state) {
     if (game_state->game_width == NULL) exit(-1);
 

@@ -9,6 +9,15 @@
 #ifndef MASTERMIND_SRC_INCLUDE_DATATYPES_H_
 #define MASTERMIND_SRC_INCLUDE_DATATYPES_H_
 
+/**
+ * @brief Shorthand for allocating memory on the heap.
+ * 
+ * This exists because you cannot pass datatypes as arguments.
+ * 
+ * source: ChatGPT.
+ */
+#define ALLOC_HEAP(dtype, size) (dtype*)_allocate_heap(sizeof(dtype), size)
+
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -69,6 +78,20 @@ typedef struct {
     /** The guesses that have been submitted in the game. */
     Guess** const guesses;
 } GameState;
+
+/**
+ * @brief Allocates memory on the heap.
+ * 
+ * A catch-all function for allocating memory on the heap. If memory allocation
+ * fails the program will exit with error code `EXIT_FAILURE`.
+ * 
+ * Src: ChatGPT.
+ * 
+ * @param type_size The size of the type being allocated.
+ * @param type_amount 
+ * @return void* 
+ */
+inline void* _allocate_heap(size_t type_size, size_t type_amount);
 
 bool feedback_equals(Feedback* const lhs, Feedback* const rhs);
 bool code_equals(Code* const lhs, Code* const rhs);
