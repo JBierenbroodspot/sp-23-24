@@ -55,3 +55,39 @@ GameState* allocate_game_state() {
 
     return game_state;
 }
+
+bool feedback_equals(
+    GameState* const game_state, 
+    Feedback* const lhs, 
+    Feedback* const rhs
+) {
+    Feedback* ptr_lhs = lhs;
+    Feedback* ptr_rhs = rhs;
+
+    for (size_t i = 0; i < game_state->game_width; i++) {
+        if (*ptr_lhs != *ptr_rhs) return false;
+
+        ptr_lhs++;
+        ptr_rhs++;
+    }
+
+    return true;
+}
+
+bool code_equals(
+    GameState* const game_state,
+    Code* const lhs,
+    Code* const rhs
+) {
+    Code* ptr_lhs = lhs;
+    Code* ptr_rhs = rhs;
+
+    for (size_t i = 0; i < game_state->game_width; i++) {
+        if (*ptr_lhs != *ptr_rhs) return false;
+
+        ptr_lhs++;
+        ptr_rhs++;        
+    }
+
+    return true;
+}
