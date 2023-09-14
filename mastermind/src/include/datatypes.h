@@ -152,11 +152,16 @@ Code* allocate_code(GameState* const game_state);
  */
 void free_code(Code* code);
 
-bool feedback_equals(Feedback* const lhs, Feedback* const rhs);
-bool code_equals(Code* const lhs, Code* const rhs);
+bool feedback_equals(
+    GameState* const game_state, 
+    Feedback* const lhs, 
+    Feedback* const rhs
+);
+bool code_equals(GameState* const game_state, Code* const lhs, Code* const rhs);
 
 void code_subtract(
-    const Code* result_buffer, 
+    GameState* const game_state,
+    Code* result_buffer, 
     const Code* const lhs, 
     const Code* const rhs
 );
