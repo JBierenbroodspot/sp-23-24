@@ -88,19 +88,11 @@ typedef struct {
  * Src: ChatGPT.
  * 
  * @param type_size The size of the type being allocated.
- * @param type_amount 
- * @return void* 
+ * @param type_amount If array: the amount of contiguous memory of size 
+ *      `type_size` should be allocated.
+ * @return void* A pointer to the first memory address allocated.
  */
 inline void* _allocate_heap(size_t type_size, size_t type_amount);
-
-bool feedback_equals(Feedback* const lhs, Feedback* const rhs);
-bool code_equals(Code* const lhs, Code* const rhs);
-
-void code_subtract(
-    const Code* result_buffer, 
-    const Code* const lhs, 
-    const Code* const rhs
-);
 
 /**
  * @brief Allocates memory for a new GameState.
@@ -159,5 +151,14 @@ Code* allocate_code(GameState* const game_state);
  * @param guess A pointer to the Code to be deleted.
  */
 void free_code(Code* code);
+
+bool feedback_equals(Feedback* const lhs, Feedback* const rhs);
+bool code_equals(Code* const lhs, Code* const rhs);
+
+void code_subtract(
+    const Code* result_buffer, 
+    const Code* const lhs, 
+    const Code* const rhs
+);
 
 #endif // MASTERMIND_SRC_INCLUDE_DATATYPES_H_
