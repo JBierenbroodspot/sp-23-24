@@ -109,10 +109,7 @@ void code_subtract(
  * @param game_length The amount of turns before the game is over.
  * @return GameState* A pointer to a newly allocated GameState.
  */
-GameState* allocate_game_state(
-    size_t const game_width, 
-    size_t const game_length
-);
+GameState* allocate_game_state();
 /**
  * @brief Frees a GameState from memory.
  * 

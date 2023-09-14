@@ -9,9 +9,9 @@ inline void* _allocate_heap(size_t type_size, size_t type_amount) {
 }
 
 Feedback* allocate_feedback(GameState* const game_state) {
-    if (game_state->game_width == NULL) exit(-1);
+    if (game_state->game_width == NULL) exit(EXIT_FAILURE);
 
-    return _allocate_feedback(game_state->game_width);
+    return ALLOC_HEAP(Feedback, game_state->game_width);
 }
 
 void free_feedback(Feedback* feedback) {
@@ -19,9 +19,9 @@ void free_feedback(Feedback* feedback) {
 }
 
 Code* allocate_code(GameState* const game_state) {
-    if (game_state->game_width == NULL) exit(-1);
+    if (game_state->game_width == NULL) exit(EXIT_FAILURE);
 
-    return _allocate_code(game_state->game_width);
+    return ALLOC_HEAP(Code, game_state->game_width);
 }
 
 void free_code(Code* code) {
@@ -29,9 +29,16 @@ void free_code(Code* code) {
 }
 
 Guess* allocate_guess(GameState* const game_state) {
-    if (game_state->game_width == NULL) abort();
+    if (game_state->game_width == NULL) exit(EXIT_FAILURE);
 
-    return _allocate_guess(game_state->game_width);
+    Code* code = ALLOC_HEAP(Code, game_state->game_width);
+    Feedback* feedback = ALLOC_HEAP(Feedback, game_state->game_width);
+    Guess* guess = ALLOC_HEAP(Guess, 1);
+
+    guess->code = code;
+    guess->feedback = feedback;
+
+    return guess;
 }
 
 void free_guess(Guess* guess) {
@@ -39,4 +46,12 @@ void free_guess(Guess* guess) {
     free_feedback(guess->feedback);
 
     free(guess);
+}
+
+GameState* allocate_game_state() {
+    GameState* game_state = malloc(sizeof(GameState));
+
+    if (game_state == NULL) exit(EXIT_FAILURE);
+
+    return game_state;
 }
