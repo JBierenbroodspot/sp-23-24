@@ -154,6 +154,7 @@ Code *allocate_code(GameState *const game_state);
  * @param guess A pointer to the Code to be deleted.
  */
 void free_code(Code *code);
+const char *stringify_feedback_state(FeedbackState fbs);
 
 /**
  * @brief Compares two `Feedback`s for position-based equality.
