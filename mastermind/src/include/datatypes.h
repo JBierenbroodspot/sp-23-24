@@ -95,7 +95,7 @@ typedef struct
  *      `type_size` should be allocated.
  * @return void* A pointer to the first memory address allocated.
  */
-inline void *_allocate_heap(size_t type_size, size_t type_amount);
+void *_allocate_heap(size_t type_size, size_t type_amount);
 
 /**
  * @brief Allocates memory for a new GameState.
