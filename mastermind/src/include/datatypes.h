@@ -126,7 +126,7 @@ Guess *allocate_guess(GameState *const game_state);
  */
 void free_guess(Guess *guess);
 
-const char *guess_to_string(const Guess *guess);
+const char *guess_to_string(const Guess *guess, size_t guess);
 
 /**
  * @brief Allocates memory for a new Feedback using the game_width from a
@@ -143,7 +143,7 @@ Feedback *allocate_feedback(GameState *const game_state);
  */
 void free_feedback(Feedback *feedback);
 
-const char *feedback_to_string(const Feedback *feedback);
+const char *feedback_to_string(const Feedback *feedback, size_t size);
 
 /**
  * @brief Allocates memory for a new Code using the game_width from a GameState.
@@ -159,7 +159,7 @@ Code *allocate_code(GameState *const game_state);
  */
 void free_code(Code *code);
 
-const char *code_to_string(const Code *code);
+const char *code_to_string(const Code *code, size_t size);
 
 const char *feedback_state_to_string(FeedbackState fbs);
 

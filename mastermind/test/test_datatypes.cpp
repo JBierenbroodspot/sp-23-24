@@ -11,16 +11,17 @@ extern "C"
 }
 
 #include <string>
+#include <array>
 
 #include <gtest/gtest.h>
 
-const FeedbackState kFeedbackStates[3][10] = {
+const std::array<FeedbackState, 10> kFeedbackStates[3] = {
     {INCORRECT},
     {ALMOST, INCORRECT, INCORRECT, INCORRECT},
     {CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT,
      INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT}};
 
-const Colour kColours[3][10] = {
+const std::array<Colour, 10> kColours[3] = {
     {0},
     {0, 0, 1, 5},
     {0, 0, 0, 1, 2, 3, 6, 1, 0, 1}};
@@ -60,7 +61,7 @@ TEST(test_feedback_to_string, handles_happy_path)
 
     for (size_t i = 0; i < num_inputs; i++)
     {
-        const char *result = feedback_to_string(&input_values[i]),
+        const char *result = feedback_to_string(&input_values[i], kFeedbackStates[i].size()),
                    *expected = expected_values[i];
 
         EXPECT_STREQ(result, expected);
@@ -82,7 +83,7 @@ TEST(test_code_to_string, handles_happy_path)
 
     for (size_t i = 0; i < num_inputs; i++)
     {
-        const char *result = code_to_string(&input_values[i]),
+        const char *result = code_to_string(&input_values[i], kFeedbackStates[i].size()),
                    *expected = expected_values[i];
 
         EXPECT_STREQ(result, expected);
@@ -104,7 +105,7 @@ TEST(test_guess_to_string, hanndles_happy_path)
 
     for (size_t i = 0; i < num_inputs; i++)
     {
-        const char *result = guess_to_string(&input_values[i]),
+        const char *result = guess_to_string(&input_values[i], kFeedbackStates[i].size()),
                    *expected = expected_values[i];
 
         EXPECT_STREQ(result, expected);
@@ -116,7 +117,7 @@ TEST(test_guess_to_string, handles_guess_without_feedback)
     Guess input_value = kGuesses[1];
     input_value.feedback = nullptr;
 
-    const char *result = guess_to_string(&input_value),
+    const char *result = guess_to_string(&input_value, 4),
                *expected = "{ code = { 0, 0, 1, 5 } }";
 
     EXPECT_STREQ(result, expected);
