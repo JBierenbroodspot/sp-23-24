@@ -25,6 +25,11 @@ const Colour kColours[3][10] = {
     {0, 0, 1, 5},
     {0, 0, 0, 1, 2, 3, 6, 1, 0, 1}};
 
+const Guess kGuesses[3] = {
+    {.code = (Code *)kColours[0][0], .feedback = (Feedback *)kFeedbackStates[0][0]},
+    {.code = (Code *)kColours[1][0], .feedback = (Feedback *)kFeedbackStates[1][0]},
+    {.code = (Code *)kColours[2][0], .feedback = (Feedback *)kFeedbackStates[2][0]}};
+
 TEST(test_feedback_state_to_string, handles_happy_path)
 {
     const size_t num_inputs = 4;
@@ -82,6 +87,39 @@ TEST(test_code_to_string, handles_happy_path)
 
         EXPECT_STREQ(result, expected);
     }
+}
+
+TEST(test_guess_to_string, hanndles_happy_path)
+{
+    const size_t num_inputs = 3;
+    const Guess input_values[num_inputs] = {
+        kGuesses[0],
+        kGuesses[1],
+        kGuesses[2]};
+
+    const char *expected_values[num_inputs] = {
+        "{ code = { 0 }, feedback = { INCORRECT } }",
+        "{ code = { 0, 0, 1, 5 }, feedback = { ALMOST, INCORRECT, INCORRECT, INCORRECT } }",
+        "{ code = { 0, 0, 0, 1, 2, 3, 6, 1, 0, 1 }, feedback = { CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT } }"};
+
+    for (size_t i = 0; i < num_inputs; i++)
+    {
+        const char *result = guess_to_string(&input_values[i]),
+                   *expected = expected_values[i];
+
+        EXPECT_STREQ(result, expected);
+    }
+}
+
+TEST(test_guess_to_string, handles_guess_without_feedback)
+{
+    Guess input_value = kGuesses[1];
+    input_value.feedback = nullptr;
+
+    const char *result = guess_to_string(&input_value),
+               *expected = "{ code = { 0, 0, 1, 5 } }";
+
+    EXPECT_STREQ(result, expected);
 }
 
 TEST(test_feedback_equals, handles_happy_path)
