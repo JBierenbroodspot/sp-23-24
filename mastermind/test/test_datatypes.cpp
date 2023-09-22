@@ -20,12 +20,14 @@ const FeedbackState kFeedbackStates[3][10]{
     {CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT,
      INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT}};
 
+TEST(test_feedback_state_to_string, handles_happy_path)
+{
     const size_t num_inputs = 4;
     const char *expected_values[num_inputs] = {
-        "INCORRECT", "ALMOST", "CORRECT", "UNKNOWN"
-    };
+        "INCORRECT", "ALMOST", "CORRECT", "UNKNOWN"};
 
-    for (auto i = 0; i < num_inputs; i++) {
+    for (auto i = 0; i < num_inputs; i++)
+    {
         const char *result = feedback_state_to_string((FeedbackState)i),
                    *expected_value = expected_values[i];
 
