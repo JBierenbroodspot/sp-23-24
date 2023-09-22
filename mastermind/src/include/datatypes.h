@@ -159,6 +159,8 @@ Code *allocate_code(GameState *const game_state);
  */
 void free_code(Code *code);
 
+const char *code_to_string(const Code *code);
+
 const char *feedback_state_to_string(FeedbackState fbs);
 
 /**
