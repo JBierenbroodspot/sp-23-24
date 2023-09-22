@@ -14,7 +14,12 @@ extern "C"
 
 #include <gtest/gtest.h>
 
-TEST(test_stringify_feedback_state, handles_happy_path) {
+const FeedbackState kFeedbackStates[3][10]{
+    {INCORRECT},
+    {ALMOST, INCORRECT, INCORRECT, INCORRECT},
+    {CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT,
+     INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT}};
+
     const size_t num_inputs = 4;
     const char *expected_values[num_inputs] = {
         "INCORRECT", "ALMOST", "CORRECT", "UNKNOWN"
@@ -25,6 +30,28 @@ TEST(test_stringify_feedback_state, handles_happy_path) {
                    *expected_value = expected_values[i];
 
         EXPECT_STREQ(result, expected_value);
+    }
+}
+
+TEST(test_feedback_to_string, handles_happy_path)
+{
+    const size_t num_inputs = 3;
+    const const Feedback input_values[3] = {
+        (Feedback)&kFeedbackStates[0][0],
+        (Feedback)&kFeedbackStates[1][0],
+        (Feedback)&kFeedbackStates[2][0]};
+
+    const char *expected_values[3] = {
+        "{ INCORRECT }",
+        "{ ALMOST, INCORRECT, INCORRECT, INCORRECT }",
+        "{ CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT }"};
+
+    for (size_t i = 0; i < num_inputs; i++)
+    {
+        const char *result = feedback_to_string(&input_values[i]),
+                   *expected = expected_values[i];
+
+        EXPECT_STREQ(result, expected);
     }
 }
 
