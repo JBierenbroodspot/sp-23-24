@@ -14,11 +14,16 @@ extern "C"
 
 #include <gtest/gtest.h>
 
-const FeedbackState kFeedbackStates[3][10]{
+const FeedbackState kFeedbackStates[3][10] = {
     {INCORRECT},
     {ALMOST, INCORRECT, INCORRECT, INCORRECT},
     {CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT,
      INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT}};
+
+const Colour kColours[3][10] = {
+    {0},
+    {0, 0, 1, 5},
+    {0, 0, 0, 1, 2, 3, 6, 1, 0, 1}};
 
 TEST(test_feedback_state_to_string, handles_happy_path)
 {
@@ -38,7 +43,7 @@ TEST(test_feedback_state_to_string, handles_happy_path)
 TEST(test_feedback_to_string, handles_happy_path)
 {
     const size_t num_inputs = 3;
-    const const Feedback input_values[3] = {
+    const Feedback input_values[3] = {
         (Feedback)&kFeedbackStates[0][0],
         (Feedback)&kFeedbackStates[1][0],
         (Feedback)&kFeedbackStates[2][0]};
@@ -51,6 +56,28 @@ TEST(test_feedback_to_string, handles_happy_path)
     for (size_t i = 0; i < num_inputs; i++)
     {
         const char *result = feedback_to_string(&input_values[i]),
+                   *expected = expected_values[i];
+
+        EXPECT_STREQ(result, expected);
+    }
+}
+
+TEST(test_code_to_string, handles_happy_path)
+{
+    const size_t num_inputs = 3;
+    const Code input_values[3] = {
+        (Code)&kColours[0][0],
+        (Code)&kColours[0][0],
+        (Code)&kColours[0][0]};
+
+    const char *expected_values[3] = {
+        "{ 0 }",
+        "{ 0, 0, 1, 5 }",
+        "{ 0, 0, 0, 1, 2, 3, 6, 1, 0, 1 }"};
+
+    for (size_t i = 0; i < num_inputs; i++)
+    {
+        const char *result = code_to_string(&input_values[i]),
                    *expected = expected_values[i];
 
         EXPECT_STREQ(result, expected);
@@ -83,7 +110,7 @@ TEST(test_feedback_equals, handles_happy_path)
              INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT},
             false)};
 
-    for (auto i = 0; i < sizeof(compare); i++)
+    for (auto i = 0; i < 3; i++)
     {
         for (auto j = i * 2; j < i * 2 + 2; j++)
         {
@@ -95,7 +122,7 @@ TEST(test_feedback_equals, handles_happy_path)
                 &input_one,
                 &input_two,
                 compare_size);
-            EXPECT_EQ(result, compare_with[j].second);
+            EXPECT_EQ(result, compare_with[j].second) << i << ", " << j;
         }
     }
 }
