@@ -21,7 +21,7 @@ TEST(test_stringify_feedback_state, handles_happy_path) {
     };
 
     for (auto i = 0; i < num_inputs; i++) {
-        const char *result = stringify_feedback_state((FeedbackState)i),
+        const char *result = feedback_state_to_string((FeedbackState)i),
                    *expected_value = expected_values[i];
 
         EXPECT_STREQ(result, expected_value);
