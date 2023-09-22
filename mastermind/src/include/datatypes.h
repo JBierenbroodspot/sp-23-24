@@ -126,6 +126,8 @@ Guess *allocate_guess(GameState *const game_state);
  */
 void free_guess(Guess *guess);
 
+const char *guess_to_string(const Guess *guess);
+
 /**
  * @brief Allocates memory for a new Feedback using the game_width from a
  * GameState.
@@ -141,6 +143,8 @@ Feedback *allocate_feedback(GameState *const game_state);
  */
 void free_feedback(Feedback *feedback);
 
+const char *feedback_to_string(const Feedback *feedback);
+
 /**
  * @brief Allocates memory for a new Code using the game_width from a GameState.
  *
@@ -154,6 +158,7 @@ Code *allocate_code(GameState *const game_state);
  * @param guess A pointer to the Code to be deleted.
  */
 void free_code(Code *code);
+
 const char *feedback_state_to_string(FeedbackState fbs);
 
 /**
