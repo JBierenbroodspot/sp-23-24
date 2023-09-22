@@ -10,7 +10,23 @@ extern "C"
 #include <stdlib.h>
 }
 
+#include <string>
+
 #include <gtest/gtest.h>
+
+TEST(test_stringify_feedback_state, handles_happy_path) {
+    const size_t num_inputs = 4;
+    const char *expected_values[num_inputs] = {
+        "INCORRECT", "ALMOST", "CORRECT", "UNKNOWN"
+    };
+
+    for (auto i = 0; i < num_inputs; i++) {
+        const char *result = stringify_feedback_state((FeedbackState)i),
+                   *expected_value = expected_values[i];
+
+        EXPECT_STREQ(result, expected_value);
+    }
+}
 
 TEST(test_feedback_equals, handles_happy_path)
 {
