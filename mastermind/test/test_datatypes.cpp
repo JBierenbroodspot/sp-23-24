@@ -43,12 +43,12 @@ TEST(test_feedback_state_to_string, handles_happy_path)
 TEST(test_feedback_to_string, handles_happy_path)
 {
     const size_t num_inputs = 3;
-    const Feedback input_values[3] = {
+    const Feedback input_values[num_inputs] = {
         (Feedback)&kFeedbackStates[0][0],
         (Feedback)&kFeedbackStates[1][0],
         (Feedback)&kFeedbackStates[2][0]};
 
-    const char *expected_values[3] = {
+    const char *expected_values[num_inputs] = {
         "{ INCORRECT }",
         "{ ALMOST, INCORRECT, INCORRECT, INCORRECT }",
         "{ CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT }"};
@@ -65,12 +65,12 @@ TEST(test_feedback_to_string, handles_happy_path)
 TEST(test_code_to_string, handles_happy_path)
 {
     const size_t num_inputs = 3;
-    const Code input_values[3] = {
+    const Code input_values[num_inputs] = {
         (Code)&kColours[0][0],
-        (Code)&kColours[0][0],
-        (Code)&kColours[0][0]};
+        (Code)&kColours[1][0],
+        (Code)&kColours[2][0]};
 
-    const char *expected_values[3] = {
+    const char *expected_values[num_inputs] = {
         "{ 0 }",
         "{ 0, 0, 1, 5 }",
         "{ 0, 0, 0, 1, 2, 3, 6, 1, 0, 1 }"};
