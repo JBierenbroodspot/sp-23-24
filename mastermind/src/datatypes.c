@@ -38,6 +38,23 @@ void free_feedback(Feedback *feedback)
     free(feedback);
 }
 
+const char *feedback_to_string(const Feedback *feedback, size_t size)
+{
+    char *result = "{ ";
+
+    size_t i = 0;
+    for (; i < size - 1; i++)
+    {
+        strcat(result, feedback_state_to_string((FeedbackState)feedback[i]));
+        strcat(result, ", ");
+    }
+
+    strcat(result, feedback_state_to_string((FeedbackState)feedback[i]));
+    strcat(result, " }");
+
+    return result;
+}
+
 Code *allocate_code(GameState *const game_state)
 {
     if (game_state->game_width == NULL)
@@ -49,6 +66,23 @@ Code *allocate_code(GameState *const game_state)
 void free_code(Code *code)
 {
     free(code);
+}
+
+const char *code_to_string(const Code *code, size_t size)
+{
+    char *result = "{ ";
+
+    size_t i = 0;
+    for (; i < size - 1; i++)
+    {
+        strcat(result, *code[i]);
+        strcat(result, ", ");
+    }
+
+    strfcat(result, *code[i]);
+    strcat(result, " }");
+
+    return result;
 }
 
 Guess *allocate_guess(GameState *const game_state)
