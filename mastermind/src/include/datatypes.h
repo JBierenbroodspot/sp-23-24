@@ -126,7 +126,7 @@ Guess *allocate_guess(GameState *const game_state);
  */
 void free_guess(Guess *guess);
 
-const char *guess_to_string(const Guess *guess, size_t guess);
+const char *guess_to_string(const Guess *guess, size_t size);
 
 /**
  * @brief Allocates memory for a new Feedback using the game_width from a
