@@ -10,12 +10,18 @@ void *_allocate_heap(size_t type_size, size_t type_amount)
     return ptr;
 }
 
-const char *feedback_state_to_string(FeedbackState fbs) {
-    switch (fbs) {
-        case 0: return "INCORRECT";
-        case 1: return "ALMOST";
-        case 2: return "CORRECT";
-        default: return "UNKNOWN";
+const char *feedback_state_to_string(FeedbackState fbs)
+{
+    switch (fbs)
+    {
+    case 0:
+        return "INCORRECT";
+    case 1:
+        return "ALMOST";
+    case 2:
+        return "CORRECT";
+    default:
+        return "UNKNOWN";
     }
 }
 
