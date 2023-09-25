@@ -1,4 +1,4 @@
-#include "datatypes.h"
+#include "datatypes/datatypes.h"
 
 void *_allocate_heap(size_t type_size, size_t type_amount)
 {
@@ -25,18 +25,9 @@ const char *feedback_state_to_string(FeedbackState fbs)
     }
 }
 
-Feedback *allocate_feedback(GameState *const game_state)
-{
-    if (game_state->game_width == NULL)
-        exit(EXIT_FAILURE);
+Feedback *allocate_feedback(size_t size) { return ALLOC_HEAP(Feedback, size); }
 
-    return ALLOC_HEAP(Feedback, game_state->game_width);
-}
-
-void free_feedback(Feedback *feedback)
-{
-    free(feedback);
-}
+void free_feedback(Feedback *feedback) { free(feedback); }
 
 const char *feedback_to_string(const Feedback *feedback, size_t size)
 {
@@ -55,18 +46,9 @@ const char *feedback_to_string(const Feedback *feedback, size_t size)
     return result;
 }
 
-Code *allocate_code(GameState *const game_state)
-{
-    if (game_state->game_width == NULL)
-        exit(EXIT_FAILURE);
+Code *allocate_code(size_t size) { return ALLOC_HEAP(Code, size); }
 
-    return ALLOC_HEAP(Code, game_state->game_width);
-}
-
-void free_code(Code *code)
-{
-    free(code);
-}
+void free_code(Code *code) { free(code); }
 
 const char *code_to_string(const Code *code, size_t size)
 {
@@ -85,13 +67,10 @@ const char *code_to_string(const Code *code, size_t size)
     return result;
 }
 
-Guess *allocate_guess(GameState *const game_state)
+Guess *allocate_guess(size_t size)
 {
-    if (game_state->game_width == NULL)
-        exit(EXIT_FAILURE);
-
-    Code *code = ALLOC_HEAP(Code, game_state->game_width);
-    Feedback *feedback = ALLOC_HEAP(Feedback, game_state->game_width);
+    Code *code = ALLOC_HEAP(Code, size);
+    Feedback *feedback = ALLOC_HEAP(Feedback, size);
     Guess *guess = ALLOC_HEAP(Guess, 1);
 
     guess->code = code;
