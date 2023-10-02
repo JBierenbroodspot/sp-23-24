@@ -7,7 +7,7 @@ set(TEST_SRC_FILES test_datatypes.cpp)
 add_executable(mastermind_test ${TEST_SRC_FILES})
 target_link_libraries(mastermind_test 
     GTest::gtest_main
-    mastermind
+    datatypes
 )
 
 include(GoogleTest)

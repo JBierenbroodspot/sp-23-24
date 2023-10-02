@@ -4,15 +4,10 @@
 # written in C as opposed to C++.
 enable_language(C)
 
-add_library(mastermind SHARED "datatypes.c")
-
-# Define in what directories the include files can be found for the 
-# mastermind_lib library.
-target_include_directories(mastermind
-    PRIVATE "${PROJECT_SOURCE_DIR}/include/")
+add_subdirectory(datatypes)
 
 # These files will be compiled into an executable.
-add_executable(mastermind_bin "main.c")
+add_executable(mastermind "main.c")
 
 # Define what libraries the target is allowd to use.
-target_link_libraries(mastermind_bin PRIVATE mastermind)
+target_link_libraries(mastermind PRIVATE datatypes)

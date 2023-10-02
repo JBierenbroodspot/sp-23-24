@@ -4,6 +4,12 @@
         "array": "c",
         "string_view": "c",
         "initializer_list": "c",
-        "utility": "c"
-    }
+        "utility": "c",
+        "*.tcc": "c"
+    },
+    "doxdocgen.generic.authorName": "Jimmy Bierenbroodspot",
+    "doxdocgen.generic.authorEmail": "jim12.brood@gmail.com",
+    "doxdocgen.file.copyrightTag": [
+        "TODO: Add license"
+    ]
 }

@@ -15,6 +15,7 @@
 #include "_feedback.h"
 #include "_game_state.h"
 #include "_guess.h"
+#include "_string.h"
 
 /**
  * @brief Shorthand for allocating memory on the heap. This exists because you
