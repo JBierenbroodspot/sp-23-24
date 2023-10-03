@@ -11,16 +11,11 @@
 #pragma once
 
 /**
- * @brief An alias for `const char *`.
- */
-typedef const char *String;
-
-/**
  * @brief A linked list for strings.
  */
 typedef struct StringedList
 {
-    String value;
+    const char *value;
     const struct StringedList *next;
 } StringedList;
 
