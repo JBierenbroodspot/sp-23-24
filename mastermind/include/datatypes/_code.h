@@ -1,5 +1,14 @@
 #pragma once
 
+#include <limits.h>
+
+#include "_string.h"
+
+/**
+ * @brief Gets the maximum amount of characters possible for all colors.
+ */
+#define COLOR_STR_MAX MAX_DECIMAL_SIZE(Color)
+
 /**
  * @brief Gives and alias to the `unsigned int` type. Not 100% necessary but
  * makes code a bit more verbose.
@@ -42,9 +51,3 @@ const char *code_to_string(const Code *code, size_t size);
  * @return false if not.
  */
 bool code_equals(Code *const lhs, Code *const rhs, size_t size);
-
-void code_subtract(
-    const Code *const lhs,
-    const Code *const rhs,
-    Code *result_buffer,
-    size_t size);
