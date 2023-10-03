@@ -67,3 +67,28 @@ TEST(test_feedback_state_to_string, handles_happy_path)
         EXPECT_STREQ(result, expected_value);
     }
 }
+
+TEST(test_feedback_to_string, handles_happy_path)
+{
+    FeedbackState fbs1 = INCORRECT,
+                  fbs2[4] = {INCORRECT, INCORRECT, INCORRECT, INCORRECT},
+                  fbs3[10] = {
+                      CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT,
+                      INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT};
+
+    const Feedback input1 = &fbs1,
+                   input2 = &fbs2[0],
+                   input3 = &fbs3[0];
+
+    const char *expected1 = "{ INCORRECT }",
+               *expected2 = "{ INCORRECT, INCORRECT, INCORRECT, INCORRECT }",
+               *expected3 = "{ CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT }";
+
+    const char *result1 = feedback_to_string(&input1, 1),
+               *result2 = feedback_to_string(&input2, 4),
+               *result3 = feedback_to_string(&input3, 10);
+
+    EXPECT_STREQ(expected1, result1);
+    EXPECT_STREQ(expected2, result2);
+    EXPECT_STREQ(expected3, result3);
+}
