@@ -92,3 +92,40 @@ TEST(test_feedback_to_string, handles_happy_path)
     EXPECT_STREQ(expected2, result2);
     EXPECT_STREQ(expected3, result3);
 }
+
+TEST(test_guess_to_string, handles_happy_path)
+{
+    Color c1 = 1,
+          c2[4] = {1, 1, 3, 4},
+          c3[10] = {1, 3, 4, 1, 1, 5, 10, 1, 1, 0};
+
+    FeedbackState fbs1 = INCORRECT,
+                  fbs2[4] = {INCORRECT, INCORRECT, INCORRECT, INCORRECT},
+                  fbs3[10] = {
+                      CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT,
+                      INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT};
+
+    Code code1 = &c1,
+         code2 = &c2[0],
+         code3 = &c3[0];
+
+    Feedback feedback1 = &fbs1,
+             feedback2 = &fbs2[0],
+             feedback3 = &fbs3[0];
+
+    const Guess input1 = {.code = &code1, .feedback = &feedback1},
+                input2 = {.code = &code2, .feedback = &feedback2},
+                input3 = {.code = &code3, .feedback = &feedback3};
+
+    const char *expected1 = "{ code = { 1 }, feedback = { INCORRECT } }",
+               *expected2 = "{ code = { 1, 1, 3, 4 }, feedback = { INCORRECT, INCORRECT, INCORRECT, INCORRECT } }",
+               *expected3 = "{ code = { 1, 3, 4, 1, 1, 5, 10, 1, 1, 0 }, feedback = { CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT } }";
+
+    const char *result1 = guess_to_string(&input1, 1),
+               *result2 = guess_to_string(&input2, 4),
+               *result3 = guess_to_string(&input3, 10);
+
+    EXPECT_STREQ(expected1, result1);
+    EXPECT_STREQ(expected2, result2);
+    EXPECT_STREQ(expected3, result3);
+}
