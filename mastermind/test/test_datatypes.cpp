@@ -129,3 +129,14 @@ TEST(test_guess_to_string, handles_happy_path)
     EXPECT_STREQ(expected2, result2);
     EXPECT_STREQ(expected3, result3);
 }
+
+TEST(test_guess_to_string, handles_empty_feedback)
+{
+    Color color[4] = {1, 1, 3, 4};
+    Code code = &color[0];
+    const Guess input = {.code = &code};
+    const char *expected = "{ code = { 1, 1, 3, 4 }, feedback = {} }",
+               *result = guess_to_string(&input, 4);
+
+    EXPECT_STREQ(expected, result);
+}
