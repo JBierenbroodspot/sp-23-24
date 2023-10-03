@@ -53,5 +53,3 @@
  * @endinternal
  */
 void *_allocate_heap(size_t type_size, size_t type_amount);
-
-const char *feedback_state_to_string(FeedbackState fbs);

@@ -24,6 +24,14 @@ typedef enum FeedbackState
 typedef FeedbackState *Feedback;
 
 /**
+ * @brief Converts a FeedbackState to its human-readable form.
+ *
+ * @param fbs a FeedbackState.
+ * @return const char* A human-readable representation of the FeedbackState.
+ */
+const char *feedback_state_to_string(FeedbackState fbs);
+
+/**
  * @brief Allocates memory for a new Feedback using the game_width from a
  * GameState.
  *
