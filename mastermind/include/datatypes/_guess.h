@@ -30,4 +30,14 @@ Guess *allocate_guess(size_t size);
  */
 void free_guess(Guess *guess);
 
+/**
+ * @brief Converts a Guess object into a human-readable string.
+ *
+ * The Code and Feedback within the Guess must contain the same amount of items
+ * with the only exception of Feedback being allowed a pointer to nothing.
+ *
+ * @param guess A pointer to a Guess to convert.
+ * @param size The amount of elements in the Code and Feedback.
+ * @return const char* A human-readable form of the Guess.
+ */
 const char *guess_to_string(const Guess *guess, size_t size);
