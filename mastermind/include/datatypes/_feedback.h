@@ -1,6 +1,11 @@
 #pragma once
 
 /**
+ * @brief Max amount of chars required for any FeedbackState.
+ */
+#define FBS_STR_MAX (size_t)sizeof("INCORRECT")
+
+/**
  * @brief Defines different levels of correctness for when two Codes are
  * compared.
  */
