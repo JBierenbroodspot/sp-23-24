@@ -52,3 +52,18 @@ TEST(test_code_to_string, handles_happy_path)
     EXPECT_STREQ(expected2, result2);
     EXPECT_STREQ(expected3, result3);
 }
+
+TEST(test_feedback_state_to_string, handles_happy_path)
+{
+    const size_t num_inputs = 4;
+    const char *expected_values[num_inputs] = {
+        "INCORRECT", "ALMOST", "CORRECT", "UNKNOWN"};
+
+    for (auto i = 0; i < num_inputs; i++)
+    {
+        const char *result = feedback_state_to_string((FeedbackState)i),
+                   *expected_value = expected_values[i];
+
+        EXPECT_STREQ(result, expected_value);
+    }
+}
