@@ -16,7 +16,8 @@ const char *code_to_string(const Code *code, size_t size)
         buffer_size = print_brackets_size +
                       print_commas_size +
                       print_color_size;
-    char *buffer = malloc(buffer_size);
+    // Clear buffer by using calloc
+    char *buffer = calloc(buffer_size, sizeof(char));
 
     strcat(buffer, "{ ");
     size_t offset = strlen(buffer);
