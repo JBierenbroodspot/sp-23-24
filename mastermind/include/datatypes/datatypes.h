@@ -28,6 +28,16 @@
 #define ALLOC_HEAP(dtype, size) (dtype *)_allocate_heap(sizeof(dtype), size)
 
 /**
+ * @brief Calculates how many characters are needed for printing a decimal.
+ *
+ * @internal
+ * Answer taken from StackOverflow (https://stackoverflow.com/a/44024876/21104520),
+ * licensed under CC BY-SA 3.0. No modifications have been made.
+ * @endinternal
+ */
+#define MAX_DECIMAL_SIZE(x) ((size_t)(CHAR_BIT * sizeof(x) * 302 / 1000) + 1)
+
+/**
  * @brief Allocates memory on the heap.
  *
  * A catch-all function for allocating memory on the heap. If memory allocation
