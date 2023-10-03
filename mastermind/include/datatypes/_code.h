@@ -1,3 +1,12 @@
+/**
+ * @file _code.h
+ * @author Jimmy Bierenbroodspot (jim12.brood@gmail.com)
+ * @brief Contains definitions and functions for manipulating Mastermind codes.
+ * @version 0.1
+ * @date 2023-10-04
+ *
+ * TODO: Add license
+ */
 #pragma once
 
 #include <limits.h>
