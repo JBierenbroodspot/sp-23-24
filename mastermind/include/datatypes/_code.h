@@ -31,7 +31,7 @@ typedef unsigned int Color;
 typedef Color *Code;
 
 /**
- * @brief Allocates memory for a new Code using the game_width from a GameState.
+ * @brief Allocates memory for a new Code.
  *
  * @param The number of elements in the list.
  * @return Feedback* A newly allocated Code.
@@ -57,10 +57,6 @@ const char *code_to_string(const Code *code, size_t size);
 /**
  * @brief Compares two `Code`s for position-based equality.
  *
- * Iterates over two `Code`s and compares each position with each other. Uses
- * the `game_state` to determine the length of the arrays.
- *
- * @param game_state The game state.
  * @param lhs Left-hand side `Code`.
  * @param rhs Right-hand side `Code`.
  * @return true if all values in the same position are equal;
