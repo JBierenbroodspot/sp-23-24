@@ -53,6 +53,36 @@ TEST(test_code_to_string, handles_happy_path)
     EXPECT_STREQ(expected3, result3);
 }
 
+TEST(test_code_equals, handles_positive)
+{
+    Color c1_1 = 1, c1_2 = 1, c2_1[4] = {2, 2, 3, 4}, c2_2[4] = {2, 2, 3, 4},
+          c3_1[10] = {3, 3, 4, 1, 1, 5, 10, 1, 1, 0},
+          c3_2[10] = {3, 3, 4, 1, 1, 5, 10, 1, 1, 0};
+
+    const Code input1_1 = &c1_1, input1_2 = &c1_2,
+               input2_1 = &c2_1[0], input2_2 = &c2_2[0],
+               input3_1 = &c3_1[0], input3_2 = &c3_2[0];
+
+    EXPECT_TRUE(code_equals(&input1_1, &input1_2, 1));
+    EXPECT_TRUE(code_equals(&input2_1, &input2_2, 4));
+    EXPECT_TRUE(code_equals(&input3_1, &input3_2, 10));
+}
+
+TEST(test_code_equals, handles_negative)
+{
+    Color c1_1 = 1, c1_2 = 2, c2_1[4] = {2, 2, 3, 1}, c2_2[4] = {4, 2, 3, 1},
+          c3_1[10] = {3, 3, 4, 1, 1, 5, 10, 1, 1, 0},
+          c3_2[10] = {10, 10, 10, 10, 1, 5, 10, 1, 1, 0};
+
+    const Code input1_1 = &c1_1, input1_2 = &c1_2,
+               input2_1 = &c2_1[0], input2_2 = &c2_2[0],
+               input3_1 = &c3_1[0], input3_2 = &c3_2[0];
+
+    EXPECT_FALSE(code_equals(&input1_1, &input1_2, 1));
+    EXPECT_FALSE(code_equals(&input2_1, &input2_2, 4));
+    EXPECT_FALSE(code_equals(&input3_1, &input3_2, 10));
+}
+
 TEST(test_feedback_state_to_string, handles_happy_path)
 {
     const size_t num_inputs = 4;
