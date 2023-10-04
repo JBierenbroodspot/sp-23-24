@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 const char *feedback_state_to_string(FeedbackState fbs)
 {
@@ -55,4 +56,17 @@ const char *feedback_to_string(const Feedback *feedback, size_t size)
     strncat(buffer + offset, str_end, str_end_size);
 
     return buffer;
+}
+
+bool feedback_equals(const Feedback *lhs, const Feedback *rhs, size_t size)
+{
+    unsigned int lhs_code = 0, rhs_code = 0;
+
+    for (size_t i = 0; i < size; i++)
+    {
+        lhs_code += (unsigned int)pow(100, (*lhs)[i]);
+        rhs_code += (unsigned int)pow(100, (*rhs)[i]);
+    }
+
+    return lhs_code == rhs_code;
 }
