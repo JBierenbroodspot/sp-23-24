@@ -37,18 +37,20 @@ typedef FeedbackState *Feedback;
 const char *feedback_state_to_string(FeedbackState fbs);
 
 /**
- * @brief Allocates memory for a new Feedback using the game_width from a
- * GameState.
+ * @brief Allocates memory for a new Feedback.
  *
- * @param The number of elements in the allocated list.
+ * @param size The number of elements in the allocated list.
  * @return Feedback* A newly allocated Feedback.
  */
-inline Feedback *allocate_feedback(size_t size) { return ALLOC_HEAP(Feedback, size); }
+inline Feedback *allocate_feedback(size_t size)
+{
+    return ALLOC_HEAP(Feedback, size);
+}
 
 /**
  * @brief Frees a Feedback from memory.
  *
- * @param guess A pointer to the Feedback to be deleted.
+ * @param feedback A pointer to the Feedback to be deleted.
  */
 inline void free_feedback(Feedback *feedback) { free(feedback); }
 
@@ -57,13 +59,11 @@ const char *feedback_to_string(const Feedback *feedback, size_t size);
 /**
  * @brief Compares two `Feedback`s for position-based equality.
  *
- * Iterates over two `Feedback`s and compares each position with eachother. Uses
- * the `game_state` to determine the length of the arrays.
+ * Iterates over two `Feedback`s and compares each position with each other.
  *
- * @param game_state The game state.
  * @param lhs Left-hand side `Feedback`.
  * @param rhs Right-hand side `Feedback`.
  * @return true if all values in the same position are equal;
  * @return false if not.
  */
-bool feedback_equals(Feedback *const lhs, Feedback *const rhs, size_t size);
+bool feedback_equals(const Feedback *lhs, const Feedback *rhs, size_t size);
