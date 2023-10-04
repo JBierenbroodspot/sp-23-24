@@ -66,4 +66,4 @@ const char *code_to_string(const Code *code, size_t size);
  * @return true if all values in the same position are equal;
  * @return false if not.
  */
-bool code_equals(Code *const lhs, Code *const rhs, size_t size);
+bool code_equals(const Code *lhs, const Code *rhs, size_t size);

@@ -39,3 +39,12 @@ const char *code_to_string(const Code *code, size_t size)
 
     return buffer;
 }
+
+bool code_equals(const Code *lhs, const Code *rhs, size_t size)
+{
+    for (size_t i = 0; i < size; i++)
+        if ((*lhs)[i] != (*rhs)[i])
+            return false;
+
+    return true;
+}
