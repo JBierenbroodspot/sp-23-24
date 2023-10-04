@@ -54,6 +54,13 @@ inline Feedback *allocate_feedback(size_t size)
  */
 inline void free_feedback(Feedback *feedback) { free(feedback); }
 
+/**
+ * @brief Converts a Feedback object into a human-readable string.
+ *
+ * @param feedback A pointer to a Feedback to convert.
+ * @param size The amount of elements in the list.
+ * @return const char* A human-readable form of the Feedback.
+ */
 const char *feedback_to_string(const Feedback *feedback, size_t size);
 
 /**
