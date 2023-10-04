@@ -4,9 +4,9 @@
 #include <inttypes.h>
 #include <string.h>
 
-Code *allocate_code(size_t size) { return ALLOC_HEAP(Code, size); }
+extern Code *allocate_code(size_t size);
 
-void free_code(Code *code) { free(code); }
+extern void free_code(Code *code);
 
 const char *code_to_string(const Code *code, size_t size)
 {

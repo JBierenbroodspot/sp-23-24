@@ -33,17 +33,17 @@ typedef Color *Code;
 /**
  * @brief Allocates memory for a new Code.
  *
- * @param The number of elements in the list.
- * @return Feedback* A newly allocated Code.
+ * @param size The number of elements in the list.
+ * @return Code* A newly allocated Code.
  */
-Code *allocate_code(size_t size);
+inline Code *allocate_code(size_t size) { return ALLOC_HEAP(Code, size); }
 
 /**
  * @brief Frees a Code from memory.
  *
- * @param guess A pointer to the Code to be deleted.
+ * @param code A pointer to the Code to be deleted.
  */
-void free_code(Code *code);
+inline void free_code(Code *code) { free(code); }
 
 /**
  * @brief Converts a Code object into a human-readable string.
