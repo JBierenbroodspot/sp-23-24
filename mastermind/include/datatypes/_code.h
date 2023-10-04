@@ -49,7 +49,7 @@ inline void free_code(Code *code) { free(code); }
  * @brief Converts a Code object into a human-readable string.
  *
  * @param code A pointer to a Code to convert.
- * @param size The amount of elements in the Code and Feedback.
+ * @param size The amount of elements in the Code.
  * @return const char* A human-readable form of the Code.
  */
 const char *code_to_string(const Code *code, size_t size);

@@ -16,7 +16,7 @@ typedef struct
 } Guess;
 
 /**
- * @brief Allocates a new Guess with the game_width from a GameState.
+ * @brief Allocates a new Guess.
  *
  * @param size The number of elements in the arrays inside the guess.
  * @return Guess* A newly allocated Guess with empty values.
