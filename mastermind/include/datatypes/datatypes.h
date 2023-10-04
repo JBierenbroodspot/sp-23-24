@@ -11,12 +11,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "_code.h"
-#include "_feedback.h"
-#include "_game_state.h"
-#include "_guess.h"
-#include "_string.h"
-
 /**
  * @brief Shorthand for allocating memory on the heap. This exists because you
  * cannot pass datatypes as arguments.
@@ -53,3 +47,11 @@
  * @endinternal
  */
 void *_allocate_heap(size_t type_size, size_t type_amount);
+
+// Include these after all definitions so that the code inside can use the
+// macros defined above.
+#include "_code.h"
+#include "_feedback.h"
+#include "_game_state.h"
+#include "_guess.h"
+#include "_string.h"
