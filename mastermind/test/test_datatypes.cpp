@@ -123,6 +123,57 @@ TEST(test_feedback_to_string, handles_happy_path)
     EXPECT_STREQ(expected3, result3);
 }
 
+TEST(test_feedback_equals, handles_positional_positive)
+{
+    FeedbackState fbs1_1 = INCORRECT, fbs1_2 = INCORRECT,
+                  fbs2_1[4] = {CORRECT, INCORRECT, INCORRECT, INCORRECT},
+                  fbs2_2[4] = {CORRECT, INCORRECT, INCORRECT, INCORRECT},
+                  fbs3_1[10] = {CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT},
+                  fbs3_2[10] = {CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT};
+
+    const Feedback input1_1 = &fbs1_1, input1_2 = &fbs1_2,
+                   input2_1 = &fbs2_1[0], input2_2 = &fbs2_2[0],
+                   input3_1 = &fbs3_1[0], input3_2 = &fbs3_2[0];
+
+    EXPECT_TRUE(feedback_equals(&input1_1, &input1_2, 1));
+    EXPECT_TRUE(feedback_equals(&input2_1, &input2_2, 4));
+    EXPECT_TRUE(feedback_equals(&input3_1, &input3_2, 10));
+}
+
+TEST(test_feedback_equals, handles_negative)
+{
+    FeedbackState fbs1_1 = INCORRECT, fbs1_2 = CORRECT,
+                  fbs2_1[4] = {CORRECT, INCORRECT, INCORRECT, INCORRECT},
+                  fbs2_2[4] = {CORRECT, ALMOST, INCORRECT, INCORRECT},
+                  fbs3_1[10] = {CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, CORRECT},
+                  fbs3_2[10] = {CORRECT, CORRECT, ALMOST, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, CORRECT};
+
+    const Feedback input1_1 = &fbs1_1, input1_2 = &fbs1_2,
+                   input2_1 = &fbs2_1[0], input2_2 = &fbs2_2[0],
+                   input3_1 = &fbs3_1[0], input3_2 = &fbs3_2[0];
+
+    EXPECT_FALSE(feedback_equals(&input1_1, &input1_2, 1));
+    EXPECT_FALSE(feedback_equals(&input2_1, &input2_2, 4));
+    EXPECT_FALSE(feedback_equals(&input3_1, &input3_2, 10));
+}
+
+TEST(test_feedback_equals, handles_unordered_positive)
+{
+    FeedbackState fbs1_1 = INCORRECT, fbs1_2 = INCORRECT,
+                  fbs2_1[4] = {INCORRECT, INCORRECT, CORRECT, INCORRECT},
+                  fbs2_2[4] = {CORRECT, INCORRECT, INCORRECT, INCORRECT},
+                  fbs3_1[10] = {INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, ALMOST, ALMOST, CORRECT},
+                  fbs3_2[10] = {CORRECT, ALMOST, ALMOST, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT};
+
+    const Feedback input1_1 = &fbs1_1, input1_2 = &fbs1_2,
+                   input2_1 = &fbs2_1[0], input2_2 = &fbs2_2[0],
+                   input3_1 = &fbs3_1[0], input3_2 = &fbs3_2[0];
+
+    EXPECT_TRUE(feedback_equals(&input1_1, &input1_2, 1));
+    EXPECT_TRUE(feedback_equals(&input2_1, &input2_2, 4));
+    EXPECT_TRUE(feedback_equals(&input3_1, &input3_2, 10));
+}
+
 TEST(test_guess_to_string, handles_happy_path)
 {
     Color c1 = 1,
