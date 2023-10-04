@@ -18,6 +18,10 @@ const char *feedback_state_to_string(FeedbackState fbs)
     }
 }
 
+extern Feedback *allocate_feedback(size_t size);
+
+extern void free_feedback(Feedback *feedback);
+
 const char *feedback_to_string(const Feedback *feedback, size_t size)
 {
     const size_t print_brackets_size = 4,    // 2 chars for the '{  }'

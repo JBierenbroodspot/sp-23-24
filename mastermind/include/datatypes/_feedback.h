@@ -43,14 +43,14 @@ const char *feedback_state_to_string(FeedbackState fbs);
  * @param The number of elements in the allocated list.
  * @return Feedback* A newly allocated Feedback.
  */
-Feedback *allocate_feedback(size_t size);
+inline Feedback *allocate_feedback(size_t size) { return ALLOC_HEAP(Feedback, size); }
 
 /**
  * @brief Frees a Feedback from memory.
  *
  * @param guess A pointer to the Feedback to be deleted.
  */
-void free_feedback(Feedback *feedback);
+inline void free_feedback(Feedback *feedback) { free(feedback); }
 
 const char *feedback_to_string(const Feedback *feedback, size_t size);
 
