@@ -9,57 +9,30 @@
  */
 #pragma once
 
-#include <limits.h>
-
-#include "_string.h"
+#include <stddef.h>
 
 /**
- * @brief Gets the maximum amount of characters possible for all colors.
+ * @brief Denotes a combination of different values used as a code in the game
+ * Mastermind.
  */
-#define COLOR_STR_MAX MAX_DECIMAL_SIZE(Color)
+typedef unsigned int Code;
 
 /**
- * @brief Gives and alias to the `unsigned int` type. Not 100% necessary but
- * makes code a bit more verbose.
- */
-typedef unsigned int Color;
-
-/**
- * @brief An alias for a pointer to a Color. This pointer is mainly meant to
- * point at arrays.
- */
-typedef Color *Code;
-
-/**
- * @brief Allocates memory for a new Code.
+ * @brief Generates a string representation of a Code.
  *
- * @param size The number of elements in the list.
- * @return Code* A newly allocated Code.
+ * @param size Number of elements.
+ * @param code The Code to turn into a string;
+ * @return const char* A string representation of the Code.
  */
-inline Code *allocate_code(size_t size) { return ALLOC_HEAP(Code, size); }
+const char *code_to_string(ptrdiff_t size, const Code code[size]);
 
 /**
- * @brief Frees a Code from memory.
+ * @brief Checks if all values at the same index are equal.
  *
- * @param code A pointer to the Code to be deleted.
- */
-inline void free_code(Code *code) { free(code); }
-
-/**
- * @brief Converts a Code object into a human-readable string.
- *
- * @param code A pointer to a Code to convert.
- * @param size The amount of elements in the Code.
- * @return const char* A human-readable form of the Code.
- */
-const char *code_to_string(const Code *code, size_t size);
-
-/**
- * @brief Compares two `Code`s for position-based equality.
- *
- * @param lhs Left-hand side `Code`.
- * @param rhs Right-hand side `Code`.
- * @return true if all values in the same position are equal;
+ * @param size Number of elements.
+ * @param lhs An array of known size;
+ * @param rhs An array of known size;
+ * @return true if all values at the same index in both arrays are equal;
  * @return false if not.
  */
-bool code_equals(const Code *lhs, const Code *rhs, size_t size);
+bool code_equals(ptrdiff_t size, const Code lhs[size], const Code rhs[size]);
