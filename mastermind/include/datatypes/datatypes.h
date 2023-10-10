@@ -31,6 +31,17 @@
  */
 #define MAX_DECIMAL_SIZE(x) ((size_t)(CHAR_BIT * sizeof(x) * 302 / 1000) + 1)
 
+/** Largest single value for a Code type. */
+#define CODE_MAX 99
+/** Maximum supported amount of codes in an array. */
+#define CODE_MAX_SIZE (size_t)10
+/** Required amount of characters for printing CODE_NAX. */
+#define CODE_MAX_PRINT_LEN (size_t)2
+/** Maximum supported amount of feedbacks in an array, same as CODE_MAX_SIZE. */
+#define FB_MAX_SIZE CODE_MAX_SIZE
+/** Required amount of characters for printing INCORRECT. */
+#define FB_MAX_PRINT_LEN (size_t)9
+
 /**
  * @brief Allocates memory on the heap.
  *
