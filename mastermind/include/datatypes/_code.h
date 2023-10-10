@@ -18,13 +18,14 @@
 typedef unsigned int Code;
 
 /**
- * @brief Generates a string representation of a Code.
+ * @brief Writes a code of `size` elements to buffer.
  *
- * @param size Number of elements.
- * @param code The Code to turn into a string;
- * @return const char* A string representation of the Code.
+ * @param buffer A string buffer with enough space to fit entire string.
+ * @param size The number of Code elements in the code array.
+ * @param code The code array.
+ * @return size_t The number of bytes written to buffer as done by snprintf().
  */
-const char *code_to_string(ptrdiff_t size, const Code code[size]);
+size_t sprintf_code(char *restrict buffer, size_t size, const Code code[size]);
 
 /**
  * @brief Checks if all values at the same index are equal.
@@ -35,4 +36,4 @@ const char *code_to_string(ptrdiff_t size, const Code code[size]);
  * @return true if all values at the same index in both arrays are equal;
  * @return false if not.
  */
-bool code_equals(ptrdiff_t size, const Code lhs[size], const Code rhs[size]);
+bool code_equals(size_t size, const Code lhs[size], const Code rhs[size]);

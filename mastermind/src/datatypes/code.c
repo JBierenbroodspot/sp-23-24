@@ -4,46 +4,25 @@
 #include <inttypes.h>
 #include <string.h>
 
-extern Code *allocate_code(size_t size);
-
-extern void free_code(Code *code);
-
-const char *code_to_string(const Code *code, size_t size)
+size_t sprintf_code(char *restrict buffer, size_t size, const Code code[size])
 {
-    const size_t print_brackets_size = 4,        // 2 chars for the '{  }'
-        print_commas_size = (size - 1) * 2,      // 2 chars for ', '
-        print_color_size = size * COLOR_STR_MAX, // the max chars for each color
-        buffer_size = print_brackets_size +
-                      print_commas_size +
-                      print_color_size;
-    // Clear buffer by using calloc
-    char *buffer = calloc(buffer_size, sizeof(char));
+    // The amount of characters required to print a code value, the extra 3 is
+    // for the leading ', \0' after every code.
+    static const size_t code_print_len = CODE_MAX_PRINT_LEN + 3;
+    size_t offset = snprintf(buffer, 3, "{ ");
 
-    strcat(buffer, "{ ");
-    size_t offset = strlen(buffer);
+    for (ptrdiff_t i = 0; i < size - 1; i++)
+        offset += snprintf(buffer + offset, code_print_len, "%u, ", code[i]);
 
-    for (size_t i = 0; i < size - 1; i++)
-    {
-        char color_str[COLOR_STR_MAX + 2];
-        int num_char = snprintf(color_str,
-                                sizeof(color_str),
-                                "%u, ",
-                                (*code)[i]);
-        strncat(buffer + offset, color_str, num_char);
-        offset += num_char;
-    }
+    offset += snprintf(buffer + offset, code_print_len, "%u }", code[size - 1]);
 
-    char str_end[COLOR_STR_MAX + 2];
-    snprintf(str_end, sizeof(str_end), "%u }", (*code)[size - 1]);
-    strncat(buffer + offset, str_end, sizeof(str_end));
-
-    return buffer;
+    return offset;
 }
 
-bool code_equals(const Code *lhs, const Code *rhs, size_t size)
+bool code_equals(size_t size, const Code lhs[size], const Code rhs[size])
 {
-    for (size_t i = 0; i < size; i++)
-        if ((*lhs)[i] != (*rhs)[i])
+    for (ptrdiff_t i = 0; i < size; i++)
+        if (lhs[i] != rhs[i])
             return false;
 
     return true;
