@@ -39,8 +39,8 @@
 #define CODE_MAX_PRINT_LEN (size_t)2
 /** Maximum supported amount of feedbacks in an array, same as CODE_MAX_SIZE. */
 #define FB_MAX_SIZE CODE_MAX_SIZE
-/** Required amount of characters for printing INCORRECT. */
-#define FB_MAX_PRINT_LEN (size_t)9
+/** Required amount of characters for printing 3. */
+#define FB_MAX_PRINT_LEN (size_t)1
 
 /**
  * @brief Allocates memory on the heap.
