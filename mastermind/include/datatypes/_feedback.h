@@ -1,15 +1,10 @@
 #pragma once
 
 /**
- * @brief Max amount of chars required for any FeedbackState.
- */
-#define FBS_STR_MAX (size_t)sizeof("INCORRECT")
-
-/**
  * @brief Defines different levels of correctness for when two Codes are
  * compared.
  */
-typedef enum FeedbackState
+typedef enum Feedback
 {
     /**
      * A code has for any given Color no corresponding Color within another
@@ -20,57 +15,30 @@ typedef enum FeedbackState
     ALMOST = 1,
     /** A Color is present in both Codes in the correct position. */
     CORRECT = 2
-} FeedbackState;
+} Feedback;
 
 /**
- * An alias for a pointer to a FeedbackState. This pointer is mainly meant to
- * point at arrays.
+ * @brief Writes Feedback of `size` elements to buffer.
+ *
+ * @param buffer A string buffer with enough space to fit the result.
+ * @param size The number of elements in the Feedback array.
+ * @param feedback The Feedback array.
+ * @return size_t The number of bytes written to buffer as done by snprintf().
  */
-typedef FeedbackState *Feedback;
+size_t sprintf_feedback(char *restrict buffer,
+                        size_t size,
+                        const Feedback feedback[size]);
 
 /**
- * @brief Converts a FeedbackState to its human-readable form.
+ * @brief Checks if two feedback arrays contain the same values, disregarding
+ * order.
  *
- * @param fbs a FeedbackState.
- * @return const char* A human-readable representation of the FeedbackState.
- */
-const char *feedback_state_to_string(FeedbackState fbs);
-
-/**
- * @brief Allocates memory for a new Feedback.
- *
- * @param size The number of elements in the allocated list.
- * @return Feedback* A newly allocated Feedback.
- */
-inline Feedback *allocate_feedback(size_t size)
-{
-    return ALLOC_HEAP(Feedback, size);
-}
-
-/**
- * @brief Frees a Feedback from memory.
- *
- * @param feedback A pointer to the Feedback to be deleted.
- */
-inline void free_feedback(Feedback *feedback) { free(feedback); }
-
-/**
- * @brief Converts a Feedback object into a human-readable string.
- *
- * @param feedback A pointer to a Feedback to convert.
- * @param size The amount of elements in the list.
- * @return const char* A human-readable form of the Feedback.
- */
-const char *feedback_to_string(const Feedback *feedback, size_t size);
-
-/**
- * @brief Compares two `Feedback`s for position-based equality.
- *
- * Iterates over two `Feedback`s and compares each position with each other.
- *
- * @param lhs Left-hand side `Feedback`.
- * @param rhs Right-hand side `Feedback`.
- * @return true if all values in the same position are equal;
+ * @param size The number of Feedback values in both arrays.
+ * @param lhs An array with `size` Feedback values.
+ * @param rhs An array with `size` Feedback values.
+ * @return true if both arrays contain the same elements;
  * @return false if not.
  */
-bool feedback_equals(const Feedback *lhs, const Feedback *rhs, size_t size);
+bool feedback_equals(size_t size,
+                     const Feedback lhs[size],
+                     const Feedback rhs[size]);

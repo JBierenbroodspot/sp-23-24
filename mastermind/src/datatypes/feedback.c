@@ -4,68 +4,34 @@
 #include <string.h>
 #include <math.h>
 
-const char *feedback_state_to_string(FeedbackState fbs)
+size_t sprintf_feedback(char *restrict buffer,
+                        size_t size,
+                        const Feedback feedback[size])
 {
-    switch (fbs)
-    {
-    case 0:
-        return "INCORRECT";
-    case 1:
-        return "ALMOST";
-    case 2:
-        return "CORRECT";
-    default:
-        return "UNKNOWN";
-    }
+    static const size_t fb_print_len = 1 + 3;
+    size_t offset = snprintf(buffer, 3, "{ ");
+
+    for (ptrdiff_t i = 0; i < size - 1; i++)
+        offset += snprintf(buffer + offset, fb_print_len, "%u, ", feedback[i]);
+
+    offset += snprintf(buffer + offset,
+                       fb_print_len,
+                       "%u }",
+                       feedback[size - 1]);
+
+    return offset;
 }
 
-extern Feedback *allocate_feedback(size_t size);
-
-extern void free_feedback(Feedback *feedback);
-
-const char *feedback_to_string(const Feedback *feedback, size_t size)
+bool feedback_equals(size_t size,
+                     const Feedback lhs[size],
+                     const Feedback rhs[size])
 {
-    const size_t print_brackets_size = 4,    // 2 chars for the '{  }'
-        print_commas_size = (size - 1) * 2,  // 2 chars for ', '
-        print_fbs_size = size * FBS_STR_MAX, // the max chars for each fbs
-        buffer_size = print_brackets_size +
-                      print_commas_size +
-                      print_fbs_size;
-    // Clear buffer by using calloc
-    char *buffer = calloc(buffer_size, sizeof(char));
+    unsigned lhs_code = 0, rhs_code = 0;
 
-    strcat(buffer, "{ ");
-    size_t offset = strlen(buffer);
-
-    for (size_t i = 0; i < size - 1; i++)
+    for (ptrdiff_t i = 0; i < size; i++)
     {
-        char fbs_str[FBS_STR_MAX + 2];
-        int num_char = snprintf(fbs_str,
-                                sizeof(fbs_str),
-                                "%s, ",
-                                feedback_state_to_string((*feedback)[i]));
-        strncat(buffer + offset, fbs_str, num_char);
-        offset += num_char;
-    }
-
-    char str_end[FBS_STR_MAX + 2];
-    int str_end_size = snprintf(str_end,
-                                sizeof(str_end),
-                                "%s }",
-                                feedback_state_to_string((*feedback)[size - 1]));
-    strncat(buffer + offset, str_end, str_end_size);
-
-    return buffer;
-}
-
-bool feedback_equals(const Feedback *lhs, const Feedback *rhs, size_t size)
-{
-    unsigned int lhs_code = 0, rhs_code = 0;
-
-    for (size_t i = 0; i < size; i++)
-    {
-        lhs_code += (unsigned int)pow(100, (*lhs)[i]);
-        rhs_code += (unsigned int)pow(100, (*rhs)[i]);
+        lhs_code += (unsigned)pow(100, (double)lhs[i]);
+        rhs_code += (unsigned)pow(100, (double)rhs[i]);
     }
 
     return lhs_code == rhs_code;
