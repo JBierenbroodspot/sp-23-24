@@ -23,8 +23,8 @@ size_t sprintf_feedback(char *restrict buffer,
 }
 
 bool feedback_equals(size_t size,
-                     const Feedback lhs[size],
-                     const Feedback rhs[size])
+                     const Feedback lhs[restrict size],
+                     const Feedback rhs[restrict size])
 {
     unsigned lhs_code = 0, rhs_code = 0;
 

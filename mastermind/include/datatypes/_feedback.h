@@ -40,5 +40,5 @@ size_t sprintf_feedback(char *restrict buffer,
  * @return false if not.
  */
 bool feedback_equals(size_t size,
-                     const Feedback lhs[size],
-                     const Feedback rhs[size]);
+                     const Feedback lhs[restrict size],
+                     const Feedback rhs[restrict size]);
