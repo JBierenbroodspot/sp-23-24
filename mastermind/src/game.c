@@ -8,11 +8,11 @@ union int_or_code
     Code *code_arr;
 };
 
-bool init_secret_code(size_t game_width,
-                      unsigned max_value,
-                      bool duplicates_allowed,
-                      int input_arr[game_width],
-                      Code code_record[restrict game_width])
+bool create_code_record(size_t game_width,
+                        unsigned max_value,
+                        bool duplicates_allowed,
+                        int input_arr[game_width],
+                        Code code_record[restrict game_width])
 {
     if (!int_is_code(game_width, max_value, duplicates_allowed, input_arr))
         return false;

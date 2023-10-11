@@ -25,11 +25,11 @@
  * @return true if the input validated as a code array and copied successfully;
  * @return false if the input failed to validate as a code array.
  */
-bool init_secret_code(size_t game_width,
-                      unsigned max_value,
-                      bool duplicates_allowed,
-                      int input_arr[game_width],
-                      Code code_record[restrict game_width]);
+bool create_code_record(size_t game_width,
+                        unsigned max_value,
+                        bool duplicates_allowed,
+                        int input_arr[game_width],
+                        Code code_record[restrict game_width]);
 
 /**
  * @brief Copies a code array into another.
