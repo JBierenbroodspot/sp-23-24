@@ -38,3 +38,30 @@ bool code_is_in(size_t size, const Code val, const Code arr[restrict size])
 
     return false;
 }
+
+bool int_is_code(size_t size,
+                 unsigned max_code,
+                 bool duplicates,
+                 const int input[restrict size])
+{
+    ptrdiff_t i, j;
+    for (i = 0; i < size; i++)
+        if (!(0 <= input[i] <= max_code))
+            return false;
+
+    if (!duplicates)
+        for (i = 0; i < size - 1; i++)
+            for (j = i + 1; j < size; j++)
+                if (i != j && input[i] == input[j])
+                    return false;
+
+    return true;
+}
+
+void int_to_code(size_t size,
+                 int source[size],
+                 Code dest[size])
+{
+    for (ptrdiff_t i = 0; i < size; i++)
+        dest[i] = (Code)source[i];
+}
