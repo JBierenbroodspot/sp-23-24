@@ -36,7 +36,9 @@ size_t sprintf_code(char *restrict buffer, size_t size, const Code code[size]);
  * @return true if all values at the same index in both arrays are equal;
  * @return false if not.
  */
-bool code_equals(size_t size, const Code lhs[size], const Code rhs[size]);
+bool code_equals(size_t size,
+                 const Code lhs[restrict size],
+                 const Code rhs[restrict size]);
 
 /**
  * @brief Checks if Code value is in Code array.

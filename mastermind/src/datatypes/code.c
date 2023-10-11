@@ -19,7 +19,9 @@ size_t sprintf_code(char *restrict buffer, size_t size, const Code code[size])
     return offset;
 }
 
-bool code_equals(size_t size, const Code lhs[size], const Code rhs[size])
+bool code_equals(size_t size,
+                 const Code lhs[restrict size],
+                 const Code rhs[restrict size])
 {
     for (ptrdiff_t i = 0; i < size; i++)
         if (lhs[i] != rhs[i])
