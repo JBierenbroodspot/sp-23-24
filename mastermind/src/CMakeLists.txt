@@ -7,7 +7,10 @@ enable_language(C)
 add_subdirectory(datatypes)
 
 # These files will be compiled into an executable.
-add_executable(mastermind "main.c")
+add_executable(mastermind "main.c" "secret_code.c")
+
+target_include_directories(mastermind 
+    PRIVATE "${PROJECT_SOURCE_DIR}/include/game")
 
 # Define what libraries the target is allowd to use.
 target_link_libraries(mastermind PRIVATE datatypes)
