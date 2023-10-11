@@ -37,3 +37,14 @@ size_t sprintf_code(char *restrict buffer, size_t size, const Code code[size]);
  * @return false if not.
  */
 bool code_equals(size_t size, const Code lhs[size], const Code rhs[size]);
+
+/**
+ * @brief Checks if Code value is in Code array.
+ *
+ * @param size Size of the array.
+ * @param val The value to look for in arr.
+ * @param arr Code array of size `size`.
+ * @return true if `val` is in `arr`;
+ * @return false if not.
+ */
+bool code_is_in(size_t size, const Code val, const Code arr[restrict size]);

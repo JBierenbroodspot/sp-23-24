@@ -27,3 +27,12 @@ bool code_equals(size_t size, const Code lhs[size], const Code rhs[size])
 
     return true;
 }
+
+bool code_is_in(size_t size, const Code val, const Code arr[restrict size])
+{
+    for (ptrdiff_t i = 0; i < size; i++)
+        if (arr[i] == val)
+            return true;
+
+    return false;
+}
