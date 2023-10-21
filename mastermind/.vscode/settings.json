@@ -12,5 +12,10 @@
     "doxdocgen.generic.authorEmail": "jim12.brood@gmail.com",
     "doxdocgen.file.copyrightTag": [
         "TODO: Add license"
-    ]
+    ],
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.formatting": "clangFormat",
+    "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, AllowShortIfStatementsOnASingleLine: true }"
 }
